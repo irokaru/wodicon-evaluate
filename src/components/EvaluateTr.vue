@@ -13,10 +13,11 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { EvaluateRow } from "@/interfaces/EvaluateRow";
+import { PropType } from "@vue/runtime-core";
 
 @Options({
   props: {
-    evaluate: { type: Object as () => EvaluateRow, required: true },
+    evaluate: { type: Object as PropType<EvaluateRow>, required: true },
   },
 })
 export default class EvaluateTr extends Vue {

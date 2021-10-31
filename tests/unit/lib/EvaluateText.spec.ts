@@ -3,6 +3,7 @@ import * as path from "path";
 
 import { EvaluateRow } from "@/interfaces/EvaluateRow";
 import { text2EvaluateRowArray, text2EvaluateRow } from "@/lib/EvaluateText";
+
 // --------------------------------------------------------------------
 
 describe("text2EvaluateRowArray", () => {
