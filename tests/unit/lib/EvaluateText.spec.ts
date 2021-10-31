@@ -1,7 +1,28 @@
+import * as fs from "fs";
+import * as path from "path";
+
 import { EvaluateRow } from "@/interfaces/EvaluateRow";
 import { text2EvaluateRowArray, text2EvaluateRow } from "@/lib/EvaluateText";
-
 // --------------------------------------------------------------------
+
+describe("text2EvaluateRowArray", () => {
+  test("実データを利用した集計", async () => {
+    const filepath = path.join(__dirname, "../../text/evaluate_ok.txt");
+    const text = fs.readFileSync(filepath, "utf-8").toString();
+
+    const result = text2EvaluateRowArray(text);
+
+    expect(result).toHaveLength(114);
+  });
+
+  test("空文字を利用した集計", async () => {
+    const text = "\n\n\n\n\n";
+
+    const result = text2EvaluateRowArray(text);
+
+    expect(result).toHaveLength(0);
+  });
+});
 
 describe("text2EvaluateRow", () => {
   const _p = (
@@ -56,6 +77,10 @@ describe("text2EvaluateRow", () => {
       [
         _p("コックさん", 1, 2, 5, 8, 2, 10),
         "[コックさん 熱中1-斬新2-物語5-画像音声8-遊びやすさ2-その他+10]",
+      ],
+      [
+        _p("ウディタ", 1, 2, 5, 8, 2, 0),
+        "[ウディタ 熱中1-斬新2-物語5-画像音声8-遊びやすさ2-その他+0]",
       ],
     ];
 

@@ -18,9 +18,11 @@ export const text2EvaluateRowArray = (text: string): EvaluateRow[] => {
   const rows: EvaluateRow[] = [];
 
   for (const line of text.split("\n")) {
+    if (!line) continue;
+
     const row = text2EvaluateRow(line);
 
-    if (!isEvaluates(row)) continue;
+    if (!isEvaluates(row.score)) continue;
 
     rows.push(row);
   }

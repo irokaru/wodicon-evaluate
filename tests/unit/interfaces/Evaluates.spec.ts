@@ -26,6 +26,7 @@ describe("isEvaluates", () => {
       // params
       _p(1, 2, 3, 4, 5, 6),
       _p(5, 6, 7, 8, 9, 10),
+      _p(5, 6, 7, 8, 9, 0),
     ];
 
     for (const suite of suites) {
