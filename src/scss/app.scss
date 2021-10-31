@@ -11,4 +11,19 @@ html, body {
   padding: 0;
   color: $BLUE_DARKEST;
   background-color: $BLUE_LIGHT;
+  font-size: $FONT_SIZE;
 }
+
+h1 {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+#app {
+  max-width: 960px;
+  margin: auto;
+}
+
+// --------------------------------------------------------------------
+
+@import "./form.scss";

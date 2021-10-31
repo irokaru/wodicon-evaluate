@@ -22,6 +22,8 @@
   @return mix(white, $color, 95%);
 }
 
+$FONT_SIZE: 18px;
+
 $BLUE_BASE: #A2D2FF;
 $BLUE_DARK: toDark($BLUE_BASE);
 $BLUE_DARKER: toDarker($BLUE_BASE);

@@ -1,0 +1,85 @@
+@import "./variables";
+
+.form-part {
+  margin-bottom: 1em;
+
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
+  select,
+  textarea {
+    transition: box-shadow .3s ease-in-out, border .3s ease-in-out, background-color .3s ease-in-out, ;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: .4rem;
+    border: 1px solid $WHITE_DARK;
+    border-radius: 3px;
+    color: $BLUE_DARKER;
+    background: $WHITE_BASE;
+    font-size: 1em;
+    resize: none;
+
+    &:focus {
+      -webkit-box-shadow: 0 0 8px $WHITE_BASE;
+      box-shadow: 0 0 8px $WHITE_BASE;
+      border: 1px solid $WHITE_BASE;
+      background-color: $WHITE_BASE;
+    }
+  }
+
+  textarea {
+    min-height: 2.5rem;
+
+    &.resize-none {
+      resize: none;
+    }
+
+    &.resize-both {
+      resize: both;
+    }
+
+    &.resize-horizontal {
+      resize: horizontal;
+    }
+
+    &.resize-vertical {
+      resize: vertical;
+    }
+  }
+
+  label {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: .25rem;
+
+    .required {
+      color: $ORANGE_DARKER;
+    }
+  }
+
+  .part-details {
+    ul.errors {
+      margin: .5rem;
+      padding: 0;
+
+      li {
+        margin: 0.25rem 0;
+        padding: 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
