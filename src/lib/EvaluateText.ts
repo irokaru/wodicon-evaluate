@@ -17,7 +17,7 @@ const SCORE_PATTERNS = {
 export const text2EvaluateRowArray = (text: string): EvaluateRow[] => {
   const rows: EvaluateRow[] = [];
 
-  for (const line of text.split("\n")) {
+  for (const line of text.split(/\r\n|\r|\n/)) {
     if (!line) continue;
 
     const row = text2EvaluateRow(line);
