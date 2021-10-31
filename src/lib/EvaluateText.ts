@@ -1,7 +1,7 @@
 import { Evaluates, isEvaluates } from "@/interfaces/Evaluates";
 import { EvaluateRow } from "@/interfaces/EvaluateRow";
 
-const NAME_PATTERN = /\[(.+?)熱/;
+const NAME_PATTERN = /\[(.+?) ?熱/;
 
 const SCORE_PATTERNS = {
   enthusiasm: /熱中(10|[1-9])-/,

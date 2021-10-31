@@ -6,12 +6,12 @@ import { text2EvaluateRowArray, text2EvaluateRow } from "@/lib/EvaluateText";
 describe("text2EvaluateRow", () => {
   const _p = (
     name: string,
-    enthusiasm: number,
-    innovative: number,
-    story: number,
-    media: number,
-    easy: number,
-    other: number
+    enthusiasm = 0,
+    innovative = 0,
+    story = 0,
+    media = 0,
+    easy = 0,
+    other = 0
   ): EvaluateRow => {
     return {
       name: name,
@@ -37,6 +37,77 @@ describe("text2EvaluateRow", () => {
         _p("-", 10, 5, 4, 2, 6, 4),
         "[熱中10-斬新5-物語4-画像音声2-遊びやすさ6-その他+4]",
       ],
+      [
+        _p("ウルファールさん", 1, 10, 4, 2, 6, 4),
+        "[ウルファールさん 熱中1-斬新10-物語4-画像音声2-遊びやすさ6-その他+4]",
+      ],
+      [
+        _p("エディ", 1, 2, 10, 2, 6, 4),
+        "[エディ 熱中1-斬新2-物語10-画像音声2-遊びやすさ6-その他+4]",
+      ],
+      [
+        _p("ハカセ", 1, 2, 5, 10, 6, 4),
+        "[ハカセ 熱中1-斬新2-物語5-画像音声10-遊びやすさ6-その他+4]",
+      ],
+      [
+        _p("ター", 1, 2, 5, 8, 10, 4),
+        "[ター 熱中1-斬新2-物語5-画像音声8-遊びやすさ10-その他+4]",
+      ],
+      [
+        _p("コックさん", 1, 2, 5, 8, 2, 10),
+        "[コックさん 熱中1-斬新2-物語5-画像音声8-遊びやすさ2-その他+10]",
+      ],
+    ];
+
+    for (const suite of suites) {
+      expect(text2EvaluateRow(suite[1])).toEqual(suite[0]);
+    }
+  });
+
+  test("値に1～10以外の評価が入っているパターン", () => {
+    const suites: [EvaluateRow, string][] = [
+      // expect, text
+      [
+        _p("ゼロ埋め"),
+        "[ゼロ埋め 熱中0-斬新0-物語0-画像音声0-遊びやすさ0-その他+0]",
+      ],
+      [
+        _p("マイナス"),
+        "[マイナス 熱中-1-斬新-2-物語-3-画像音声-4-遊びやすさ-5-その他+-6]",
+      ],
+      [
+        _p("10超過"),
+        "[10超過 熱中-11-斬新-12-物語-31-画像音声-43-遊びやすさ-50-その他+64]",
+      ],
+      [
+        _p("0パディング"),
+        "[0パディング 熱中-01-斬新-02-物語-03-画像音声-04-遊びやすさ-05-その他+06]",
+      ],
+      [
+        _p("全角数字"),
+        "[全角数字 熱中-１-斬新-２-物語-３-画像音声-４-遊びやすさ-５-その他+６]",
+      ],
+      [
+        _p("日本語"),
+        "[日本語 熱中-い-斬新-ろ-物語-は-画像音声-に-遊びやすさ-ほ-その他+へ]",
+      ],
+      [
+        _p("からっぽ"),
+        "[からっぽ 熱中--斬新--物語--画像音声--遊びやすさ--その他+]",
+      ],
+    ];
+
+    for (const suite of suites) {
+      expect(text2EvaluateRow(suite[1])).toEqual(suite[0]);
+    }
+  });
+
+  test("紛らわしいものたち", () => {
+    const suites: [EvaluateRow, string][] = [
+      // expect, text
+      [_p("-"), "[]"],
+      [_p("-"), ""],
+      [_p("-"), "[これはダミーのやつですよ]"],
     ];
 
     for (const suite of suites) {
