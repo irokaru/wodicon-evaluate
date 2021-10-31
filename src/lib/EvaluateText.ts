@@ -5,11 +5,11 @@ const NAME_PATTERN = /\[(.+?)熱/;
 
 const SCORE_PATTERNS = {
   enthusiasm: /熱中(10|[1-9])-/,
-  innovative: /熱中(10|[1-9])-/,
-  story: /熱中(10|[1-9])-/,
-  media: /熱中(10|[1-9])-/,
-  easy: /熱中(10|[1-9])-/,
-  other: /熱中(10|[1-9])-/,
+  innovative: /斬新(10|[1-9])-/,
+  story: /物語(10|[1-9])-/,
+  media: /画像音声(10|[1-9])-/,
+  easy: /遊びやすさ(10|[1-9])-/,
+  other: /その他\+(10|[1-9])]/,
 };
 
 // --------------------------------------------------------------------
@@ -28,7 +28,7 @@ export const text2EvaluateRowArray = (text: string): EvaluateRow[] => {
   return rows;
 };
 
-const text2EvaluateRow = (text: string): EvaluateRow => {
+export const text2EvaluateRow = (text: string): EvaluateRow => {
   const row: EvaluateRow = {
     name: "",
     score: {
