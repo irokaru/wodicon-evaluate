@@ -11,7 +11,9 @@
       v-model="text"
     />
 
-    <button @click="exec">評価を算出</button>
+    <div class="right">
+      <div class="btn big soft orange" @click="exec">評価を算出</div>
+    </div>
   </main>
 </template>
 
@@ -27,7 +29,7 @@ import FormSelect from "@/components/Textarea.vue";
 export default class App extends Vue {
   public text = "";
 
-  public exec() {
+  public exec(): void {
     // TODO
     console.log("clicked!!!");
   }
