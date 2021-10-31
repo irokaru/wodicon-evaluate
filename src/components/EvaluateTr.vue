@@ -16,7 +16,7 @@ import { EvaluateRow } from "@/interfaces/EvaluateRow";
 
 @Options({
   props: {
-    evaluate: { type: Object, required: true },
+    evaluate: { type: Object as () => EvaluateRow, required: true },
   },
 })
 export default class EvaluateTr extends Vue {
