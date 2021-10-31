@@ -20,7 +20,7 @@ export const isEvaluates = (arg: unknown): arg is Evaluates => {
   ];
 
   for (const key of keys) {
-    const value = (arg as Evaluates)[key];
+    const value = (arg as Evaluates)[key] ?? null;
 
     if (typeof value !== "number" || value < 1 || 10 < value) return false;
   }
