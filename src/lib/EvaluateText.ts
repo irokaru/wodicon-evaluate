@@ -14,41 +14,46 @@ const SCORE_PATTERNS = {
 
 // --------------------------------------------------------------------
 
-export const text2evaluaterow = (text: string): EvaluateRow[] => {
+export const text2EvaluateRowArray = (text: string): EvaluateRow[] => {
   const rows: EvaluateRow[] = [];
 
   for (const line of text.split("\n")) {
-    const matches: EvaluateRow = {
-      name: "",
-      score: {
-        enthusiasm: 0,
-        innovative: 0,
-        story: 0,
-        media: 0,
-        easy: 0,
-        other: 0,
-      },
-    };
+    const row = text2EvaluateRow(line);
 
-    const name = NAME_PATTERN.exec(line);
-    matches.name = name ? name[1] : "-";
+    if (!isEvaluates(row)) continue;
 
-    for (const [key, pattern] of Object.entries(SCORE_PATTERNS) as [
-      keyof Evaluates,
-      RegExp
-    ][]) {
-      const match = pattern.exec(line);
-
-      if (!match) break;
-
-      const result = Number(match[1]);
-      matches.score[key] = result;
-    }
-
-    if (!isEvaluates(matches)) continue;
-
-    rows.push(matches);
+    rows.push(row);
   }
 
   return rows;
+};
+
+const text2EvaluateRow = (text: string): EvaluateRow => {
+  const row: EvaluateRow = {
+    name: "",
+    score: {
+      enthusiasm: 0,
+      innovative: 0,
+      story: 0,
+      media: 0,
+      easy: 0,
+      other: 0,
+    },
+  };
+
+  const name = NAME_PATTERN.exec(text);
+  row.name = name ? name[1] : "-";
+
+  for (const [key, pattern] of Object.entries(SCORE_PATTERNS) as [
+    keyof Evaluates,
+    RegExp
+  ][]) {
+    const match = pattern.exec(text);
+
+    if (!match) continue;
+
+    row.score[key] = parseInt(match[1]);
+  }
+
+  return row;
 };
