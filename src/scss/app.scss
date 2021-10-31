@@ -1,0 +1,14 @@
+@import "./variables";
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+
+* {
+  font-family: 'Kiwi Maru', serif;
+  box-sizing: content-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  color: $BLUE_DARKEST;
+  background-color: $BLUE_LIGHT;
+}

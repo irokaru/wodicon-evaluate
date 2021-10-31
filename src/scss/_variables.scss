@@ -1,0 +1,55 @@
+@function toDark($color) {
+  @return mix(black, $color, 20%);
+}
+
+@function toDarker($color) {
+  @return mix(black, $color, 50%);
+}
+
+@function toDarkest($color) {
+  @return mix(black, $color, 95%);
+}
+
+@function toLight($color) {
+  @return mix(white, $color, 20%);
+}
+
+@function toLighter($color) {
+  @return mix(white, $color, 50%);
+}
+
+@function toLightest($color) {
+  @return mix(white, $color, 95%);
+}
+
+$BLUE_BASE: #A2D2FF;
+$BLUE_DARK: toDark($BLUE_BASE);
+$BLUE_DARKER: toDarker($BLUE_BASE);
+$BLUE_DARKEST: toDarkest($BLUE_BASE);
+$BLUE_LIGHT: toLight($BLUE_BASE);
+$BLUE_LIGHTER: toLighter($BLUE_BASE);
+$BLUE_LIGHTEST: toLightest($BLUE_BASE);
+
+$WHITE_BASE: #FEF9EF;
+$WHITE_DARK: toDark($WHITE_BASE);
+$WHITE_DARKER: toDarker($WHITE_BASE);
+$WHITE_DARKEST: toDarkest($WHITE_BASE);
+$WHITE_LIGHT: toLight($WHITE_BASE);
+$WHITE_LIGHTER: toLighter($WHITE_BASE);
+$WHITE_LIGHTEST: toLightest($WHITE_BASE);
+
+$ORANGE_BASE: #FF865E;
+$ORANGE_DARK: toDark($ORANGE_BASE);
+$ORANGE_DARKER: toDarker($ORANGE_BASE);
+$ORANGE_DARKEST: toDarkest($ORANGE_BASE);
+$ORANGE_LIGHT: toLight($ORANGE_BASE);
+$ORANGE_LIGHTER: toLighter($ORANGE_BASE);
+$ORANGE_LIGHTEST: toLightest($ORANGE_BASE);
+
+$YELLOW_BASE: #FEE440;
+$YELLOW_DARK: toDark($YELLOW_BASE);
+$YELLOW_DARKER: toDarker($YELLOW_BASE);
+$YELLOW_DARKEST: toDarkest($YELLOW_BASE);
+$YELLOW_LIGHT: toLight($YELLOW_BASE);
+$YELLOW_LIGHTER: toLighter($YELLOW_BASE);
+$YELLOW_LIGHTEST: toLightest($YELLOW_BASE);
