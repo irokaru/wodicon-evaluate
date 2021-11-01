@@ -95,7 +95,7 @@ export default class App extends Vue {
 
   public median(key: keyof Evaluates): number {
     const numbers = this.getEvaluateNumbers(this.evaluates, key);
-    return roundDigit(medianArray(numbers), 2);
+    return medianArray(numbers);
   }
 
   private getEvaluateNumbers(

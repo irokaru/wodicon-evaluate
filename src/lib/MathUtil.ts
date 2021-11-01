@@ -19,11 +19,12 @@ export const medianArray = (array: number[]): number => {
     return 0;
   });
 
-  const mid = (sorted.length / 2) >> 0;
+  const mid = sorted.length / 2;
+  const midInt = mid >> 0;
 
-  if (mid % 2 === 0) return sorted[mid];
+  if (!Number.isInteger(mid)) return sorted[midInt];
 
-  return (sorted[mid - 1] + sorted[mid]) / 2;
+  return (sorted[midInt - 1] + sorted[midInt]) / 2;
 };
 
 export const roundDigit = (num: number, digit: number): number => {
