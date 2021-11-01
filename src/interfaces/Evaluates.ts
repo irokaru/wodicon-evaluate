@@ -7,6 +7,15 @@ export interface Evaluates {
   other: number;
 }
 
+export const EvaluateKeys: (keyof Evaluates)[] = [
+  "enthusiasm",
+  "innovative",
+  "story",
+  "media",
+  "easy",
+  "other",
+];
+
 export const isEvaluates = (arg: unknown): arg is Evaluates => {
   if (typeof arg !== "object" || arg === null) return false;
 

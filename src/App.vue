@@ -23,13 +23,15 @@
 
     <table>
       <thead>
-        <th>投票者名</th>
-        <th>熱中</th>
-        <th>斬新</th>
-        <th>物語</th>
-        <th>画像音声</th>
-        <th>遊びやすさ</th>
-        <th>その他</th>
+        <tr>
+          <th>投票者名</th>
+          <th>熱中</th>
+          <th>斬新</th>
+          <th>物語</th>
+          <th>画像音声</th>
+          <th>遊びやすさ</th>
+          <th>その他</th>
+        </tr>
       </thead>
 
       <tbody>
@@ -41,13 +43,18 @@
       </tbody>
 
       <tfoot>
-        <th>投票者名</th>
-        <th>熱中</th>
-        <th>斬新</th>
-        <th>物語</th>
-        <th>画像音声</th>
-        <th>遊びやすさ</th>
-        <th>その他</th>
+        <tr>
+          <th>平均値</th>
+          <template v-for="key in evaluateKeys" :key="key">
+            <td>{{ average(key) }}</td>
+          </template>
+        </tr>
+        <tr>
+          <th>中央値</th>
+          <template v-for="key in evaluateKeys" :key="key">
+            <td>{{ median(key) }}</td>
+          </template>
+        </tr>
       </tfoot>
     </table>
   </main>
@@ -55,13 +62,14 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { text2EvaluateRowArray } from "./lib/EvaluateText";
+import { averageArray, medianArray, roundDigit } from "./lib/MathUtil";
 
 import FormSelect from "@/components/Textarea.vue";
 import EvaluateTr from "@/components/EvaluateTr.vue";
 
 import { EvaluateRow } from "./interfaces/EvaluateRow";
-import { text2EvaluateRowArray } from "./lib/EvaluateText";
-import { Evaluates } from "./interfaces/Evaluates";
+import { Evaluates, EvaluateKeys } from "./interfaces/Evaluates";
 
 @Options({
   components: {
@@ -72,9 +80,27 @@ import { Evaluates } from "./interfaces/Evaluates";
 export default class App extends Vue {
   public text = "";
   public evaluates: EvaluateRow[] = [];
+  public evaluateKeys: (keyof Evaluates)[] = EvaluateKeys;
 
   public exec(): void {
     this.evaluates = text2EvaluateRowArray(this.text);
+  }
+
+  public average(key: keyof Evaluates): number {
+    const numbers = this.getEvaluateNumbers(this.evaluates, key);
+    return roundDigit(averageArray(numbers), 2);
+  }
+
+  public median(key: keyof Evaluates): number {
+    const numbers = this.getEvaluateNumbers(this.evaluates, key);
+    return roundDigit(medianArray(numbers), 2);
+  }
+
+  private getEvaluateNumbers(
+    evaluates: EvaluateRow[],
+    key: keyof Evaluates
+  ): number[] {
+    return evaluates.map((evaluate) => evaluate.score[key]);
   }
 }
 </script>

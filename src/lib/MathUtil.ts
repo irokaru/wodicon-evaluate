@@ -25,3 +25,9 @@ export const medianArray = (array: number[]): number => {
 
   return (sorted[mid - 1] + sorted[mid]) / 2;
 };
+
+export const roundDigit = (num: number, digit: number): number => {
+  const power = Math.pow(10, digit);
+  const upper = num * power;
+  return Math.round(upper) / power;
+};
