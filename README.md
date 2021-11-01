@@ -1,29 +1,45 @@
-# wodifes-eval
+# wodifes-evaluate
 
-## Project setup
-```
+ウディコン評価算出機です。
+
+## 開発の準備
+
+### 1. 環境構築
+
+nodejsとyarnが必要です。インストールしておきましょう。
+
+### 2. パッケージインストール
+
+```bash
 yarn install
 ```
 
-### Compiles and hot-reloads for development
-```
+上記コマンドで各種必要パッケージを落としてきましょう。
+
+## 開発
+
+### 1. ホットリロードをかましながら
+
+```bash
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
+アプリが立ち上がります。ブラウザにアクセスしたらよいです。ファイルの変更を自動で読み取って状態を自動で更新してくれます。
+
+### 2. テストする
+
+```bash
+yarn test
 ```
 
-### Run your unit tests
-```
-yarn test:unit
-```
+`/tests` 配下にあるすべてのテストファイル(`*.spec.ts`)をテストします。
 
-### Lints and fixes files
-```
+終了とともに `/coverage` ディレクトリにカバレッジも吐き出してくれます。まずは70%を目指して頑張りましょう。
+
+### 3. コード整形する
+
+```bash
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+コミット時に自動で整形してくれますが、コミット前にも整形してほしいときに使います。
