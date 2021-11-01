@@ -1,12 +1,14 @@
 <template>
   <tr>
     <td>{{ evaluate.name }}</td>
-    <td>{{ evaluate.score.enthusiasm }}</td>
-    <td>{{ evaluate.score.innovative }}</td>
-    <td>{{ evaluate.score.story }}</td>
-    <td>{{ evaluate.score.media }}</td>
-    <td>{{ evaluate.score.easy }}</td>
-    <td>{{ evaluate.score.other }}</td>
+    <td
+      class="number"
+      :class="`c${score}`"
+      v-for="score in evaluate.score"
+      :key="score"
+    >
+      {{ score }}
+    </td>
   </tr>
 </template>
 

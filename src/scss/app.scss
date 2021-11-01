@@ -24,6 +24,58 @@ h1 {
   margin: auto;
 }
 
+.table-wrapper {
+  margin: 2rem 0;
+  max-height: 80vh;
+  overflow-y: scroll;
+  position: relative;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    th, td {
+      vertical-align: middle;
+      padding: .5rem;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+    }
+
+    tfoot {
+      position: sticky;
+      bottom: 0;
+    }
+
+    thead, tfoot {
+      td, th {
+        background-color: $ORANGE_LIGHTER;
+      }
+    }
+
+    tbody {
+      tr {
+        background-color: $ORANGE_LIGHTEST;
+      }
+    }
+
+    td.number {
+      text-align: right;
+    }
+
+    /* セルの色 */
+    @for $i from 0 to 11 {
+      td.number.c#{$i} {
+        background-color: mix(white, $ORANGE_LIGHTER, (10 - $i) * 7%);
+      }
+    }
+  }
+}
+
+
 // --------------------------------------------------------------------
 
 @import "./form.scss";

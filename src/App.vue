@@ -21,42 +21,44 @@
 
     <div>投票数: {{ evaluates.length }}</div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>投票者名</th>
-          <th>熱中</th>
-          <th>斬新</th>
-          <th>物語</th>
-          <th>画像音声</th>
-          <th>遊びやすさ</th>
-          <th>その他</th>
-        </tr>
-      </thead>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>投票者名</th>
+            <th>熱中</th>
+            <th>斬新</th>
+            <th>物語</th>
+            <th>画像音声</th>
+            <th>遊びやすさ</th>
+            <th>その他</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <EvaluateTr
-          :evaluate="evaluate"
-          v-for="(evaluate, index) in evaluates"
-          :key="`${evaluate.name}-${index}`"
-        />
-      </tbody>
+        <tbody>
+          <EvaluateTr
+            :evaluate="evaluate"
+            v-for="(evaluate, index) in evaluates"
+            :key="`${evaluate.name}-${index}`"
+          />
+        </tbody>
 
-      <tfoot>
-        <tr>
-          <th>平均値</th>
-          <template v-for="key in evaluateKeys" :key="key">
-            <td>{{ average(key) }}</td>
-          </template>
-        </tr>
-        <tr>
-          <th>中央値</th>
-          <template v-for="key in evaluateKeys" :key="key">
-            <td>{{ median(key) }}</td>
-          </template>
-        </tr>
-      </tfoot>
-    </table>
+        <tfoot>
+          <tr>
+            <th>平均値</th>
+            <td class="number" v-for="key in evaluateKeys" :key="key">
+              {{ average(key) }}
+            </td>
+          </tr>
+          <tr>
+            <th>中央値</th>
+            <td class="number" v-for="key in evaluateKeys" :key="key">
+              {{ median(key) }}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </main>
 </template>
 
