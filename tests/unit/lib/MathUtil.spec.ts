@@ -1,4 +1,9 @@
-import { averageArray, medianArray, totalArray } from "@/lib/MathUtil";
+import {
+  averageArray,
+  medianArray,
+  roundDigit,
+  totalArray,
+} from "@/lib/MathUtil";
 
 describe("totalArray", () => {
   test("test", () => {
@@ -47,6 +52,28 @@ describe("medianArray", () => {
 
     for (const suite of suites) {
       expect(medianArray(suite[1])).toEqual(suite[0]);
+    }
+  });
+});
+
+describe("roundDigit", () => {
+  test("test", () => {
+    const suites: [number, number, number][] = [
+      // expect, number, digit
+      [0, 0, 1],
+
+      [1.2, 1.23456789, 1],
+      [1.23, 1.23456789, 2],
+      [1.235, 1.23456789, 3],
+      [1.2346, 1.23456789, 4],
+      [1.23457, 1.23456789, 5],
+      [1.234568, 1.23456789, 6],
+
+      [2, 1.99999, 4],
+    ];
+
+    for (const suite of suites) {
+      expect(roundDigit(suite[1], suite[2])).toEqual(suite[0]);
     }
   });
 });
