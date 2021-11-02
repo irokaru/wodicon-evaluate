@@ -98,3 +98,26 @@ describe("median", () => {
     }
   });
 });
+
+describe("total", () => {
+  const wrapper = mount(App);
+
+  test("test", () => {
+    const suites: [number, EvaluateRow[], keyof Evaluates][] = [
+      // expect, evaluates, key
+      [0, [], "enthusiasm"],
+
+      [6, dataset, "enthusiasm"],
+      [11, dataset, "innovative"],
+      [12, dataset, "story"],
+      [15, dataset, "media"],
+      [18, dataset, "easy"],
+      [21, dataset, "other"],
+    ];
+
+    for (const suite of suites) {
+      wrapper.vm.evaluates = suite[1];
+      expect(wrapper.vm.total(suite[2])).toEqual(suite[0]);
+    }
+  });
+});
