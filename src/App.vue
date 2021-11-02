@@ -56,6 +56,12 @@
               {{ median(key) }}
             </td>
           </tr>
+          <tr>
+            <th>合計値</th>
+            <td class="number" v-for="key in evaluateKeys" :key="key">
+              {{ total(key) }}
+            </td>
+          </tr>
         </tfoot>
       </table>
     </div>
@@ -65,7 +71,12 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { text2EvaluateRowArray } from "./lib/EvaluateText";
-import { averageArray, medianArray, roundDigit } from "./lib/MathUtil";
+import {
+  averageArray,
+  medianArray,
+  roundDigit,
+  totalArray,
+} from "./lib/MathUtil";
 
 import FormSelect from "@/components/Textarea.vue";
 import EvaluateTr from "@/components/EvaluateTr.vue";
@@ -86,6 +97,11 @@ export default class App extends Vue {
 
   public exec(): void {
     this.evaluates = text2EvaluateRowArray(this.text);
+  }
+
+  public total(key: keyof Evaluates): number {
+    const numbers = this.getEvaluateNumbers(this.evaluates, key);
+    return totalArray(numbers);
   }
 
   public average(key: keyof Evaluates): number {
