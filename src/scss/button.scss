@@ -41,7 +41,7 @@ $btn-colors: (
     border-radius: 3px;
   }
 
-  &[disabled="true"] {
+  &[disabled] {
     cursor: not-allowed;
   }
 
