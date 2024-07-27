@@ -21,7 +21,7 @@
 
     <div class="separate">
       <div>投票数: {{ evaluates.length }}</div>
-      <div class="btn small soft yellow">結果をXでシェアする</div>
+      <div class="btn small soft green">結果をXでシェアする</div>
     </div>
 
     <div class="table-wrapper">
