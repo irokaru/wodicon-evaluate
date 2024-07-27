@@ -13,7 +13,7 @@ describe("template", () => {
     media: any,
     easy: any,
     other: any
-  ): any => {
+  ) => {
     return {
       name: name,
       score: {
@@ -27,16 +27,12 @@ describe("template", () => {
     };
   };
 
-  test("ちゃんと入ってるとき", () => {
-    const suites: [any[], any[]][] = [
-      // expect, params
-      [["hoge", 1, 2, 3, 4, 5, 6], _p("hoge", 1, 2, 3, 4, 5, 6)],
-    ];
-
-    for (const suite of suites) {
+  test.each([[["hoge", 1, 2, 3, 4, 5, 6], _p("hoge", 1, 2, 3, 4, 5, 6)]])(
+    "ちゃんと入ってるとき",
+    (expected, evaluates) => {
       const wrapper = mount(EvaluateTr, {
         props: {
-          evaluate: suite[1],
+          evaluate: evaluates,
         },
       });
 
@@ -44,10 +40,10 @@ describe("template", () => {
 
       expect(tds).toHaveLength(7);
 
-      for (const index in suite[0].keys()) {
+      for (const index in expected.keys()) {
         const num = Number(index);
-        expect(tds[num]).toEqual(suite[0][num]);
+        expect(tds[num]).toEqual(expected[num]);
       }
     }
-  });
+  );
 });

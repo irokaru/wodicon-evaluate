@@ -25,10 +25,10 @@ describe("input", () => {
       await wrapper.get("textarea").setValue(suite[1]);
       await wrapper.vm.$nextTick();
 
-      const emit = wrapper.emitted("update:modelValue") as any[][];
+      const emit = wrapper.emitted("update:modelValue");
 
       expect(emit).toBeTruthy();
-      expect(emit[0][0]).toEqual(suite[0]);
+      expect(emit?.[0][0]).toEqual(suite[0]);
     }
   });
 });

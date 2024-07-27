@@ -6,7 +6,7 @@ export const Evaluates = [
   "easy",
   "other",
 ] as const;
-export type EvaluateKeys = typeof Evaluates[number];
+export type EvaluateKeys = (typeof Evaluates)[number];
 export type Evaluates = Record<EvaluateKeys, number>;
 
 export const isEvaluates = (arg: unknown): arg is Evaluates => {

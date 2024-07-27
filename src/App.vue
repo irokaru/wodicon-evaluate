@@ -24,7 +24,7 @@
       <div
         class="btn small soft"
         :class="isExecuted ? 'green' : 'gray'"
-        :disabled="isExecuted"
+        :disabled="!isExecuted"
       >
         結果をXでシェアする
       </div>

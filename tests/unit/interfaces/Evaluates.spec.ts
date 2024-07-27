@@ -4,13 +4,13 @@ import { isEvaluates } from "@/interfaces/Evaluates";
 
 describe("isEvaluates", () => {
   const _p = (
-    enthusiasm: any,
-    innovative: any,
-    story: any,
-    media: any,
-    easy: any,
-    other: any
-  ): any => {
+    enthusiasm: unknown,
+    innovative: unknown,
+    story: unknown,
+    media: unknown,
+    easy: unknown,
+    other: unknown
+  ) => {
     return {
       enthusiasm: enthusiasm,
       innovative: innovative,

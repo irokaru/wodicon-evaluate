@@ -23,6 +23,7 @@ $btn-colors: (
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  user-select: none;
 
   &.big {
     font-size: 1.5em;
@@ -38,6 +39,10 @@ $btn-colors: (
 
   &.soft {
     border-radius: 3px;
+  }
+
+  &[disabled="true"] {
+    cursor: not-allowed;
   }
 
   @mixin btn-depth($main-color) {
