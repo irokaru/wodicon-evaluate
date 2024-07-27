@@ -10,23 +10,23 @@ import { Evaluates } from "@/interfaces/Evaluates";
 // --------------------------------------------------------------------
 
 const _p = (
-  name: any,
-  enthusiasm: any,
-  innovative: any,
-  story: any,
-  media: any,
-  easy: any,
-  other: any
-): any => {
+  name: string,
+  enthusiasm: number,
+  innovative: number,
+  story: number,
+  media: number,
+  easy: number,
+  other: number
+) => {
   return {
-    name: name,
+    name,
     score: {
-      enthusiasm: enthusiasm,
-      innovative: innovative,
-      story: story,
-      media: media,
-      easy: easy,
-      other: other,
+      enthusiasm,
+      innovative,
+      story,
+      media,
+      easy,
+      other,
     },
   };
 };
@@ -56,68 +56,62 @@ describe("exec", () => {
 describe("average", () => {
   const wrapper = mount(App);
 
-  test("test", () => {
-    const suites: [number, EvaluateRow[], keyof Evaluates][] = [
-      // expect, evaluates, key
-      [0, [], "enthusiasm"],
-
-      [2, dataset, "enthusiasm"],
-      [3.67, dataset, "innovative"],
-      [4, dataset, "story"],
-      [5, dataset, "media"],
-      [6, dataset, "easy"],
-      [7, dataset, "other"],
-    ];
-
-    for (const suite of suites) {
-      wrapper.vm.evaluates = suite[1];
-      expect(wrapper.vm.average(suite[2])).toEqual(suite[0]);
-    }
+  test.each<{
+    expected: number;
+    evaluates: EvaluateRow[];
+    key: keyof Evaluates;
+  }>([
+    { expected: 0, evaluates: [], key: "enthusiasm" },
+    { expected: 2, evaluates: dataset, key: "enthusiasm" },
+    { expected: 3.67, evaluates: dataset, key: "innovative" },
+    { expected: 4, evaluates: dataset, key: "story" },
+    { expected: 5, evaluates: dataset, key: "media" },
+    { expected: 6, evaluates: dataset, key: "easy" },
+    { expected: 7, evaluates: dataset, key: "other" },
+  ])("calc average for key: $key", ({ expected, evaluates, key }) => {
+    wrapper.vm.evaluates = evaluates;
+    expect(wrapper.vm.average(key)).toEqual(expected);
   });
 });
 
 describe("median", () => {
   const wrapper = mount(App);
 
-  test("test", () => {
-    const suites: [number, EvaluateRow[], keyof Evaluates][] = [
-      // expect, evaluates, key
-      [0, [], "enthusiasm"],
-
-      [2, dataset, "enthusiasm"],
-      [4, dataset, "innovative"],
-      [4, dataset, "story"],
-      [5, dataset, "media"],
-      [6, dataset, "easy"],
-      [7, dataset, "other"],
-    ];
-
-    for (const suite of suites) {
-      wrapper.vm.evaluates = suite[1];
-      expect(wrapper.vm.median(suite[2])).toEqual(suite[0]);
-    }
+  test.each<{
+    expected: number;
+    evaluates: EvaluateRow[];
+    key: keyof Evaluates;
+  }>([
+    { expected: 0, evaluates: [], key: "enthusiasm" },
+    { expected: 2, evaluates: dataset, key: "enthusiasm" },
+    { expected: 4, evaluates: dataset, key: "innovative" },
+    { expected: 4, evaluates: dataset, key: "story" },
+    { expected: 5, evaluates: dataset, key: "media" },
+    { expected: 6, evaluates: dataset, key: "easy" },
+    { expected: 7, evaluates: dataset, key: "other" },
+  ])("calc median for key: $key", ({ expected, evaluates, key }) => {
+    wrapper.vm.evaluates = evaluates;
+    expect(wrapper.vm.median(key)).toEqual(expected);
   });
 });
 
 describe("total", () => {
   const wrapper = mount(App);
 
-  test("test", () => {
-    const suites: [number, EvaluateRow[], keyof Evaluates][] = [
-      // expect, evaluates, key
-      [0, [], "enthusiasm"],
-
-      [6, dataset, "enthusiasm"],
-      [11, dataset, "innovative"],
-      [12, dataset, "story"],
-      [15, dataset, "media"],
-      [18, dataset, "easy"],
-      [21, dataset, "other"],
-    ];
-
-    for (const suite of suites) {
-      wrapper.vm.evaluates = suite[1];
-      expect(wrapper.vm.total(suite[2])).toEqual(suite[0]);
-    }
+  test.each<{
+    expected: number;
+    evaluates: EvaluateRow[];
+    key: keyof Evaluates;
+  }>([
+    { expected: 0, evaluates: [], key: "enthusiasm" },
+    { expected: 6, evaluates: dataset, key: "enthusiasm" },
+    { expected: 11, evaluates: dataset, key: "innovative" },
+    { expected: 12, evaluates: dataset, key: "story" },
+    { expected: 15, evaluates: dataset, key: "media" },
+    { expected: 18, evaluates: dataset, key: "easy" },
+    { expected: 21, evaluates: dataset, key: "other" },
+  ])("calc total for key: $key", ({ expected, evaluates, key }) => {
+    wrapper.vm.evaluates = evaluates;
+    expect(wrapper.vm.total(key)).toEqual(expected);
   });
 });

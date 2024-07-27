@@ -1,4 +1,4 @@
-import { Evaluates, isEvaluates } from "@/interfaces/Evaluates";
+import { EvaluateKeys, isEvaluates } from "@/interfaces/Evaluates";
 import { EvaluateRow } from "@/interfaces/EvaluateRow";
 
 const NAME_PATTERN = /\[(.+?) ?熱/;
@@ -47,7 +47,7 @@ export const text2EvaluateRow = (text: string): EvaluateRow => {
   row.name = name ? name[1] : "-";
 
   for (const [key, pattern] of Object.entries(SCORE_PATTERNS) as [
-    keyof Evaluates,
+    EvaluateKeys,
     RegExp
   ][]) {
     const match = pattern.exec(text);

@@ -21,7 +21,13 @@
 
     <div class="separate">
       <div>投票数: {{ evaluates.length }}</div>
-      <div class="btn small soft green">結果をXでシェアする</div>
+      <div
+        class="btn small soft"
+        :class="isExecuted ? 'green' : 'gray'"
+        :disabled="isExecuted"
+      >
+        結果をXでシェアする
+      </div>
     </div>
 
     <div class="table-wrapper">
@@ -85,7 +91,7 @@ import FormSelect from "@/components/Textarea.vue";
 import EvaluateTr from "@/components/EvaluateTr.vue";
 
 import { EvaluateRow } from "./interfaces/EvaluateRow";
-import { Evaluates, EvaluateKeys } from "./interfaces/Evaluates";
+import { Evaluates } from "./interfaces/Evaluates";
 
 @Options({
   components: {
@@ -96,10 +102,12 @@ import { Evaluates, EvaluateKeys } from "./interfaces/Evaluates";
 export default class App extends Vue {
   public text = "";
   public evaluates: EvaluateRow[] = [];
-  public evaluateKeys: (keyof Evaluates)[] = EvaluateKeys;
+  public evaluateKeys = Evaluates;
+  public isExecuted = false;
 
   public exec(): void {
     this.evaluates = text2EvaluateRowArray(this.text);
+    this.isExecuted = this.evaluates.length > 0;
   }
 
   public total(key: keyof Evaluates): number {

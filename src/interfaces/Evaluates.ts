@@ -1,20 +1,13 @@
-export interface Evaluates {
-  enthusiasm: number;
-  innovative: number;
-  story: number;
-  media: number;
-  easy: number;
-  other: number;
-}
-
-export const EvaluateKeys: (keyof Evaluates)[] = [
+export const Evaluates = [
   "enthusiasm",
   "innovative",
   "story",
   "media",
   "easy",
   "other",
-];
+] as const;
+export type EvaluateKeys = typeof Evaluates[number];
+export type Evaluates = Record<EvaluateKeys, number>;
 
 export const isEvaluates = (arg: unknown): arg is Evaluates => {
   if (typeof arg !== "object" || arg === null) return false;
