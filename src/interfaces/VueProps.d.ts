@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // NOTE: cannot export PropType from vue module
 export type PropConstructor<T = any> =
   | {
@@ -16,3 +17,4 @@ type PropMethod<T, TConstructor = any> = [T] extends [
       readonly prototype: TConstructor;
     }
   : never;
+/* eslint-enable @typescript-eslint/no-explicit-any */

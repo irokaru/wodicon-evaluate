@@ -6,13 +6,13 @@ import EvaluateTr from "@/components/EvaluateTr.vue";
 
 describe("template", () => {
   const _p = (
-    name: any,
-    enthusiasm: any,
-    innovative: any,
-    story: any,
-    media: any,
-    easy: any,
-    other: any
+    name: string,
+    enthusiasm: number,
+    innovative: number,
+    story: number,
+    media: number,
+    easy: number,
+    other: number
   ) => {
     return {
       name: name,

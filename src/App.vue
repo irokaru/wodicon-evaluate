@@ -21,13 +21,14 @@
 
     <div class="separate">
       <div>投票数: {{ evaluates.length }}</div>
-      <div
+      <button
         class="btn small soft"
         :class="isExecuted ? 'green' : 'gray'"
         :disabled="!isExecuted"
+        @click="shareOnX"
       >
         結果をXでシェアする
-      </div>
+      </button>
     </div>
 
     <div class="table-wrapper">
@@ -123,6 +124,25 @@ export default class App extends Vue {
   public median(key: keyof Evaluates): number {
     const numbers = this.getEvaluateNumbers(this.evaluates, key);
     return medianArray(numbers);
+  }
+
+  public shareOnX(): void {
+    const labels = ["熱中", "斬新", "物語", "画像音声", "遊びやすさ", "その他"];
+
+    const averages = Evaluates.map(this.average);
+    const totals = Evaluates.map(this.total);
+    const medians = Evaluates.map(this.median);
+    const text =
+      `投票数: ${this.evaluates.length}\n` +
+      `項目: ${labels.join(" ")}\n` +
+      `平均値: ${averages.join(" ")}\n` +
+      `中央値: ${medians.join(" ")}\n` +
+      `合計値: ${totals.join(" ")}\n` +
+      "#ウディコン評価算出機\n" +
+      "https://wodicon-evaluate.nononotyaya.net/";
+
+    const url = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
   }
 
   private getEvaluateNumbers(
