@@ -19,7 +19,10 @@
 
     <h2>算出結果</h2>
 
-    <div>投票数: {{ evaluates.length }}</div>
+    <div class="separate">
+      <div>投票数: {{ evaluates.length }}</div>
+      <div class="btn small soft yellow">結果をXでシェアする</div>
+    </div>
 
     <div class="table-wrapper">
       <table>
