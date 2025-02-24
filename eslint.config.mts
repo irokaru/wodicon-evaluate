@@ -3,10 +3,11 @@ import globals from 'globals'
 import typescriptEslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
 import prettierConfig from "@vue/eslint-config-prettier";
+import vitest from 'eslint-plugin-vitest'
 
 export default typescriptEslint.config(
   {
-    ignores: ["**/.*", "node_modules/**/*", "dist/**/*"],
+    ignores: ["node_modules/**/*", "dist/**/*"],
   },
   {
     extends: [
@@ -14,8 +15,9 @@ export default typescriptEslint.config(
       ...typescriptEslint.configs.recommended,
       ...pluginVue.configs["flat/recommended"],
       prettierConfig,
+      vitest.configs.recommended,
     ],
-    files: ["**/*.{ts,vue"],
+    files: ["**/*.{ts,vue}"],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',

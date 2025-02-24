@@ -5,10 +5,10 @@
 
   <main>
     <VTextArea
+      v-model="text"
       name="evaluate"
       placeholder="ここに届いたメールの本文をコピペしてください"
       resize="vertical"
-      v-model="text"
     />
 
     <div class="right">
@@ -47,28 +47,28 @@
 
         <tbody>
           <EvaluateTr
-            :evaluate="evaluate"
             v-for="(evaluate, index) in evaluates"
             :key="`${evaluate.name}-${index}`"
+            :evaluate="evaluate"
           />
         </tbody>
 
         <tfoot>
           <tr>
             <th>平均値</th>
-            <td class="number" v-for="key in evaluateKeys" :key="key">
+            <td v-for="key in evaluateKeys" :key="key" class="number">
               {{ average(key) }}
             </td>
           </tr>
           <tr>
             <th>中央値</th>
-            <td class="number" v-for="key in evaluateKeys" :key="key">
+            <td v-for="key in evaluateKeys" :key="key" class="number">
               {{ median(key) }}
             </td>
           </tr>
           <tr>
             <th>合計値</th>
-            <td class="number" v-for="key in evaluateKeys" :key="key">
+            <td v-for="key in evaluateKeys" :key="key" class="number">
               {{ total(key) }}
             </td>
           </tr>

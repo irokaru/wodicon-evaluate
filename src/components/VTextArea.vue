@@ -1,9 +1,5 @@
 <template>
   <div class="form-part">
-    <label :for="name" v-if="label">
-      <span v-if="required" class="required">*</span>
-    </label>
-
     <textarea
       :class="`resize-${resize}`"
       :name="name"
@@ -21,12 +17,10 @@
 <script setup lang="ts">
 interface Props {
   name: string;
-  label?: string;
   rows?: number;
   cols?: number;
   placeholder?: string;
   resize?: string;
-  required?: boolean;
   modelValue?: string;
 }
 

@@ -2,10 +2,10 @@
   <tr>
     <td>{{ evaluate.name }}</td>
     <td
-      class="number"
-      :class="`c${score}`"
       v-for="score in evaluate.score"
       :key="score"
+      class="number"
+      :class="`c${score}`"
     >
       {{ score }}
     </td>

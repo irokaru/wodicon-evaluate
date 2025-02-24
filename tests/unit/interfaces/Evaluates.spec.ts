@@ -1,4 +1,4 @@
-import { isEvaluates } from "@/interfaces/Evaluates";
+import { isEvaluates } from "../../../src/interfaces/Evaluates";
 
 // --------------------------------------------------------------------
 

@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "husky"
   },
   "dependencies": {
@@ -17,11 +19,14 @@
     "@types/node": "^22.13.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.21.0",
     "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-vitest": "^0.5.4",
     "eslint-plugin-vue": "^9.32.0",
+    "happy-dom": "^17.1.4",
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "lint-staged": "^15.4.3",
@@ -31,6 +36,7 @@
     "typescript-eslint": "^8.24.1",
     "vite": "^6.1.0",
     "vite-plugin-eslint": "^1.8.1",
+    "vitest": "^3.0.6",
     "vue-tsc": "^2.2.0"
   },
   "lint-staged": {
