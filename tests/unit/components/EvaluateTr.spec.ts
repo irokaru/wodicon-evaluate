@@ -12,7 +12,7 @@ describe("template", () => {
     story: number,
     media: number,
     easy: number,
-    other: number
+    other: number,
   ) => {
     return {
       name: name,
@@ -44,6 +44,6 @@ describe("template", () => {
         const num = Number(index);
         expect(tds[num]).toEqual(expected[num]);
       }
-    }
+    },
   );
 });

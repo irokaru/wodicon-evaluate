@@ -4,7 +4,7 @@
   </header>
 
   <main>
-    <FormSelect
+    <VTextArea
       name="evaluate"
       placeholder="ここに届いたメールの本文をコピペしてください"
       resize="vertical"
@@ -78,8 +78,7 @@
   </main>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from "vue-class-component";
+<script setup lang="ts">
 import { text2EvaluateRowArray } from "./lib/EvaluateText";
 import {
   averageArray,
@@ -88,68 +87,61 @@ import {
   totalArray,
 } from "./lib/MathUtil";
 
-import FormSelect from "@/components/Textarea.vue";
-import EvaluateTr from "@/components/EvaluateTr.vue";
+import VTextArea from "./components/VTextArea.vue";
+import EvaluateTr from "./components/EvaluateTr.vue";
 
-import { EvaluateRow } from "./interfaces/EvaluateRow";
+import type { EvaluateRow } from "./interfaces/EvaluateRow";
 import { Evaluates } from "./interfaces/Evaluates";
+import { ref } from "vue";
 
-@Options({
-  components: {
-    FormSelect,
-    EvaluateTr,
-  },
-})
-export default class App extends Vue {
-  public text = "";
-  public evaluates: EvaluateRow[] = [];
-  public evaluateKeys = Evaluates;
-  public isExecuted = false;
+const text = ref("");
+const evaluates = ref<EvaluateRow[]>([]);
+const evaluateKeys = ref(Evaluates);
+const isExecuted = ref(false);
 
-  public exec(): void {
-    this.evaluates = text2EvaluateRowArray(this.text);
-    this.isExecuted = this.evaluates.length > 0;
-  }
+const exec = (): void => {
+  evaluates.value = text2EvaluateRowArray(text.value);
+  isExecuted.value = evaluates.value.length > 0;
+};
 
-  public total(key: keyof Evaluates): number {
-    const numbers = this.getEvaluateNumbers(this.evaluates, key);
-    return totalArray(numbers);
-  }
+const total = (key: keyof Evaluates): number => {
+  const numbers = getEvaluateNumbers(evaluates.value, key);
+  return totalArray(numbers);
+};
 
-  public average(key: keyof Evaluates): number {
-    const numbers = this.getEvaluateNumbers(this.evaluates, key);
-    return roundDigit(averageArray(numbers), 2);
-  }
+const average = (key: keyof Evaluates): number => {
+  const numbers = getEvaluateNumbers(evaluates.value, key);
+  return roundDigit(averageArray(numbers), 2);
+};
 
-  public median(key: keyof Evaluates): number {
-    const numbers = this.getEvaluateNumbers(this.evaluates, key);
-    return medianArray(numbers);
-  }
+const median = (key: keyof Evaluates): number => {
+  const numbers = getEvaluateNumbers(evaluates.value, key);
+  return medianArray(numbers);
+};
 
-  public shareOnX(): void {
-    const labels = ["熱中", "斬新", "物語", "画像音声", "遊びやすさ", "その他"];
+const shareOnX = (): void => {
+  const labels = ["熱中", "斬新", "物語", "画像音声", "遊びやすさ", "その他"];
 
-    const averages = Evaluates.map(this.average);
-    const totals = Evaluates.map(this.total);
-    const medians = Evaluates.map(this.median);
-    const text =
-      `投票数: ${this.evaluates.length}\n` +
-      `項目: ${labels.join(" ")}\n` +
-      `平均値: ${averages.join(" ")}\n` +
-      `中央値: ${medians.join(" ")}\n` +
-      `合計値: ${totals.join(" ")}\n` +
-      "#ウディコン評価算出機\n" +
-      "https://wodicon-evaluate.nononotyaya.net/";
+  const averages = evaluateKeys.value.map(average);
+  const totals = evaluateKeys.value.map(total);
+  const medians = evaluateKeys.value.map(median);
+  const text =
+    `投票数: ${evaluates.value.length}\n` +
+    `項目: ${labels.join(" ")}\n` +
+    `平均値: ${averages.join(" ")}\n` +
+    `中央値: ${medians.join(" ")}\n` +
+    `合計値: ${totals.join(" ")}\n` +
+    "#ウディコン評価算出機\n" +
+    "https://wodicon-evaluate.nononotyaya.net/";
 
-    const url = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
-    window.open(url, "_blank");
-  }
+  const url = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank");
+};
 
-  private getEvaluateNumbers(
-    evaluates: EvaluateRow[],
-    key: keyof Evaluates
-  ): number[] {
-    return evaluates.map((evaluate) => evaluate.score[key]);
-  }
-}
+const getEvaluateNumbers = (
+  evaluates: EvaluateRow[],
+  key: keyof Evaluates,
+): number[] => {
+  return evaluates.map((evaluate) => evaluate.score[key]);
+};
 </script>

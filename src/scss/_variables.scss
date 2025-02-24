@@ -1,25 +1,26 @@
+@use "sass:color";
 @function toDark($color) {
-  @return mix(black, $color, 20%);
+  @return color.mix(black, $color, 20%);
 }
 
 @function toDarker($color) {
-  @return mix(black, $color, 50%);
+  @return color.mix(black, $color, 50%);
 }
 
 @function toDarkest($color) {
-  @return mix(black, $color, 95%);
+  @return color.mix(black, $color, 95%);
 }
 
 @function toLight($color) {
-  @return mix(white, $color, 20%);
+  @return color.mix(white, $color, 20%);
 }
 
 @function toLighter($color) {
-  @return mix(white, $color, 50%);
+  @return color.mix(white, $color, 50%);
 }
 
 @function toLightest($color) {
-  @return mix(white, $color, 95%);
+  @return color.mix(white, $color, 95%);
 }
 
 $FONT_SIZE: 18px;

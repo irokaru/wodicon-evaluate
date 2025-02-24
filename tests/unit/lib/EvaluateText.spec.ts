@@ -33,7 +33,7 @@ describe("text2EvaluateRow", () => {
     story = 0,
     media = 0,
     easy = 0,
-    other = 0
+    other = 0,
   ): EvaluateRow => {
     return {
       name: name,

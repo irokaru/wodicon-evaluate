@@ -12,20 +12,8 @@
   </tr>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import { EvaluateRow } from "@/interfaces/EvaluateRow";
-import { PropConstructor } from "@/interfaces/VueProps";
+<script setup lang="ts">
+import type { EvaluateRow } from "../interfaces/EvaluateRow";
 
-@Options({
-  props: {
-    evaluate: {
-      type: Object as PropConstructor<EvaluateRow>,
-      required: true,
-    },
-  },
-})
-export default class EvaluateTr extends Vue {
-  public evaluate!: EvaluateRow;
-}
+const { evaluate } = defineProps<{ evaluate: EvaluateRow }>();
 </script>

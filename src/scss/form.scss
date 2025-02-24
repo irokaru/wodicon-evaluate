@@ -1,4 +1,4 @@
-@import "./variables";
+@use "variables";
 
 .form-part {
   margin-bottom: 1em;
@@ -17,18 +17,18 @@
     -moz-box-sizing: border-box;
     width: 100%;
     padding: .4rem;
-    border: 1px solid $WHITE_DARK;
+    border: 1px solid variables.$WHITE_DARK;
     border-radius: 3px;
-    color: $BLUE_DARKER;
-    background: $WHITE_BASE;
+    color: variables.$BLUE_DARKER;
+    background: variables.$WHITE_BASE;
     font-size: 1em;
     resize: none;
 
     &:focus {
-      -webkit-box-shadow: 0 0 8px $WHITE_BASE;
-      box-shadow: 0 0 8px $WHITE_BASE;
-      border: 1px solid $WHITE_BASE;
-      background-color: $WHITE_BASE;
+      -webkit-box-shadow: 0 0 8px variables.$WHITE_BASE;
+      box-shadow: 0 0 8px variables.$WHITE_BASE;
+      border: 1px solid variables.$WHITE_BASE;
+      background-color: variables.$WHITE_BASE;
     }
   }
 
@@ -59,7 +59,7 @@
     margin: .25rem;
 
     .required {
-      color: $ORANGE_DARKER;
+      color: variables.$ORANGE_DARKER;
     }
   }
 

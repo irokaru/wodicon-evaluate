@@ -16,7 +16,7 @@ const _p = (
   story: number,
   media: number,
   easy: number,
-  other: number
+  other: number,
 ) => {
   return {
     name,

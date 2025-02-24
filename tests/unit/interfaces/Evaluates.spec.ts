@@ -9,7 +9,7 @@ describe("isEvaluates", () => {
     story: unknown,
     media: unknown,
     easy: unknown,
-    other: unknown
+    other: unknown,
   ) => {
     return {
       enthusiasm: enthusiasm,

@@ -1,12 +1,13 @@
-@import "./variables";
+@use "sass:color";
+@use "variables";
 
 $btn-colors: (
-  "blue" : $BLUE_BASE,
-  "white": $WHITE_BASE,
-  "gray": $GRAY_BASE,
-  "orange": $ORANGE_BASE,
-  "yellow": $YELLOW_BASE,
-  "green": $GREEN_BASE,
+  "blue" : variables.$BLUE_BASE,
+  "white": variables.$WHITE_BASE,
+  "gray": variables.$GRAY_BASE,
+  "orange": variables.$ORANGE_BASE,
+  "yellow": variables.$YELLOW_BASE,
+  "green": variables.$GREEN_BASE,
 );
 
 .btn {
@@ -47,7 +48,7 @@ $btn-colors: (
 
   @mixin btn-depth($main-color) {
     $depth: 3px;
-    $depth-color: darken($main-color, 33.3%);
+    $depth-color: color.adjust($main-color, $lightness: -33.3%);
 
     box-shadow: 0 $depth 0 $depth-color;
 
@@ -80,7 +81,7 @@ $btn-colors: (
   @mixin btn-fill($main-color) {
     border: 2px solid $main-color;
     background-color: $main-color;
-    color: $WHITE_LIGHTEST;
+    color: variables.$WHITE_LIGHTEST;
 
     &:hover {
       background-color: rgba(0,0,0,0);
@@ -92,7 +93,7 @@ $btn-colors: (
 
       &:hover {
         background-color: $main-color;
-        color: $WHITE_LIGHTEST;
+        color: variables.$WHITE_LIGHTEST;
       }
     }
   }
