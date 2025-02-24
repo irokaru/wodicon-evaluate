@@ -3,10 +3,10 @@ import {
   medianArray,
   roundDigit,
   totalArray,
-} from "@/lib/MathUtil";
+} from "../../../src/lib/MathUtil";
 
 describe("totalArray", () => {
-  test("test", () => {
+  test("total", () => {
     const suites: [number, number[]][] = [
       // expect, array
       [15, [1, 2, 3, 4, 5]],
@@ -20,8 +20,8 @@ describe("totalArray", () => {
   });
 });
 
-describe("acerageArray", () => {
-  test("test", () => {
+describe("averageArray", () => {
+  test("average", () => {
     const suites: [number, number[]][] = [
       // expect, array
       [3, [1, 2, 3, 4, 5]],
@@ -36,7 +36,7 @@ describe("acerageArray", () => {
 });
 
 describe("medianArray", () => {
-  test("test", () => {
+  test("median", () => {
     const suites: [number, number[]][] = [
       // expect, array
       [3, [1, 2, 3, 4, 5]],
@@ -57,7 +57,7 @@ describe("medianArray", () => {
 });
 
 describe("roundDigit", () => {
-  test("test", () => {
+  test("round", () => {
     const suites: [number, number, number][] = [
       // expect, number, digit
       [0, 0, 1],

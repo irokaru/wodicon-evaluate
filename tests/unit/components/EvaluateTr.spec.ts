@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 
-import EvaluateTr from "@/components/EvaluateTr.vue";
+import EvaluateTr from "../../../src/components/EvaluateTr.vue";
 
 // --------------------------------------------------------------------
 
