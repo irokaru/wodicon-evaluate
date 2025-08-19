@@ -22,9 +22,13 @@ export const medianArray = (array: number[]): number => {
   const mid = sorted.length / 2;
   const midInt = mid >> 0;
 
-  if (!Number.isInteger(mid)) return sorted[midInt];
+  if (!Number.isInteger(mid))
+    return sorted[midInt] !== undefined ? sorted[midInt] : 0;
 
-  return (sorted[midInt - 1] + sorted[midInt]) / 2;
+  const left = sorted[midInt - 1];
+  const right = sorted[midInt];
+  if (left === undefined || right === undefined) return 0;
+  return (left + right) / 2;
 };
 
 export const roundDigit = (num: number, digit: number): number => {

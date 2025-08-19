@@ -1,4 +1,4 @@
-import { Evaluates } from "./Evaluates";
+import type { Evaluates } from "./Evaluates";
 
 export interface EvaluateRow {
   name: string;

@@ -45,7 +45,7 @@ export const text2EvaluateRow = (text: string): EvaluateRow => {
   };
 
   const name = NAME_PATTERN.exec(text);
-  row.name = name ? name[1] : "-";
+  row.name = name?.[1] ?? "-";
 
   for (const [key, pattern] of Object.entries(SCORE_PATTERNS) as [
     EvaluateKeys,
@@ -55,7 +55,9 @@ export const text2EvaluateRow = (text: string): EvaluateRow => {
 
     if (!match) continue;
 
-    row.score[key] = parseInt(match[1]);
+    if (typeof match[1] === "string") {
+      row.score[key] = parseInt(match[1]);
+    }
   }
 
   return row;

@@ -91,12 +91,13 @@ import VTextArea from "./components/VTextArea.vue";
 import EvaluateTr from "./components/EvaluateTr.vue";
 
 import type { EvaluateRow } from "./interfaces/EvaluateRow";
-import { Evaluates } from "./interfaces/Evaluates";
-import { ref } from "vue";
+import { EvaluateKeyLabels } from "./constants/Evaluates";
+import { EvaluateKey } from "./constants/Evaluates";
+import { computed, ref } from "vue";
 
 const text = ref("");
 const evaluates = ref<EvaluateRow[]>([]);
-const evaluateKeys = ref(Evaluates);
+const evaluateKeys = computed<EvaluateKey[]>(() => Object.values(EvaluateKey));
 const isExecuted = ref(false);
 
 const exec = (): void => {
@@ -104,24 +105,23 @@ const exec = (): void => {
   isExecuted.value = evaluates.value.length > 0;
 };
 
-const total = (key: keyof Evaluates): number => {
+const total = (key: EvaluateKey): number => {
   const numbers = getEvaluateNumbers(evaluates.value, key);
   return totalArray(numbers);
 };
 
-const average = (key: keyof Evaluates): number => {
+const average = (key: EvaluateKey): number => {
   const numbers = getEvaluateNumbers(evaluates.value, key);
   return roundDigit(averageArray(numbers), 2);
 };
 
-const median = (key: keyof Evaluates): number => {
+const median = (key: EvaluateKey): number => {
   const numbers = getEvaluateNumbers(evaluates.value, key);
   return medianArray(numbers);
 };
 
 const shareOnX = (): void => {
-  const labels = ["熱中", "斬新", "物語", "画像音声", "遊びやすさ", "その他"];
-
+  const labels = Object.values(EvaluateKeyLabels);
   const averages = evaluateKeys.value.map(average);
   const totals = evaluateKeys.value.map(total);
   const medians = evaluateKeys.value.map(median);
@@ -140,7 +140,7 @@ const shareOnX = (): void => {
 
 const getEvaluateNumbers = (
   evaluates: EvaluateRow[],
-  key: keyof Evaluates,
+  key: EvaluateKey,
 ): number[] => {
   return evaluates.map((evaluate) => evaluate.score[key]);
 };
