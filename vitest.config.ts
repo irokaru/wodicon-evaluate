@@ -1,25 +1,21 @@
-/// <reference types="vitest" />
-
-import vue from "@vitejs/plugin-vue";
-import { fileURLToPath } from "node:url";
+import { mergeConfig } from "vite";
 
 import { defineConfig } from "vitest/config";
 
-export default defineConfig({
-  plugins: [vue()],
-  test: {
-    globals: true,
-    environment: "happy-dom",
-    reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["default"],
-    coverage: {
-      provider: "v8",
-      reporter: ["text", "lcov", "clover"],
-      include: ["src/**/*"],
+import viteConfig from "./vite.config";
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      globals: true,
+      environment: "happy-dom",
+      reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["default"],
+      coverage: {
+        provider: "v8",
+        reporter: ["text", "lcov", "clover"],
+        include: ["src/**/*"],
+      },
     },
-  },
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("src", import.meta.url)),
-    },
-  },
-});
+  }),
+);
