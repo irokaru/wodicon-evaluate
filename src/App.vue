@@ -91,13 +91,12 @@ import VTextArea from "./components/VTextArea.vue";
 import EvaluateTr from "./components/EvaluateTr.vue";
 
 import type { EvaluateRow } from "./interfaces/EvaluateRow";
-import { EvaluateKeyLabels } from "./constants/Evaluates";
-import { EvaluateKey } from "./constants/Evaluates";
-import { computed, ref } from "vue";
+import { EvaluateKey, EvaluateKeyLabels } from "./constants/Evaluates";
+import { ref } from "vue";
 
 const text = ref("");
 const evaluates = ref<EvaluateRow[]>([]);
-const evaluateKeys = computed<EvaluateKey[]>(() => Object.values(EvaluateKey));
+const evaluateKeys = Object.values(EvaluateKey);
 const isExecuted = ref(false);
 
 const exec = (): void => {
@@ -122,9 +121,9 @@ const median = (key: EvaluateKey): number => {
 
 const shareOnX = (): void => {
   const labels = Object.values(EvaluateKeyLabels);
-  const averages = evaluateKeys.value.map(average);
-  const totals = evaluateKeys.value.map(total);
-  const medians = evaluateKeys.value.map(median);
+  const averages = evaluateKeys.map(average);
+  const totals = evaluateKeys.map(total);
+  const medians = evaluateKeys.map(median);
   const text =
     `投票数: ${evaluates.value.length}\n` +
     `項目: ${labels.join(" ")}\n` +
