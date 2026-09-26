@@ -1,4 +1,4 @@
-import { buildShareText, buildShareUrl } from "../../../src/lib/ShareText";
+import { buildShareText, buildShareUrl } from "@/lib/ShareText";
 
 describe("buildShareText", () => {
   test("従来のシェア文面と同一", () => {

@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 
-import Textarea from "../../../src/components/VTextArea.vue";
+import Textarea from "@/components/VTextArea.vue";
 
 // --------------------------------------------------------------------
 
