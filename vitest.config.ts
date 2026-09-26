@@ -15,6 +15,7 @@ export default mergeConfig(
         provider: "v8",
         reporter: ["text", "lcov", "clover"],
         include: ["src/**/*"],
+        exclude: ["**/*.scss", "**/*.css", "**/*.svg", "src/vite-env.d.ts"],
       },
     },
   }),
