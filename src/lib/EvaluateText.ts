@@ -4,7 +4,7 @@ import type { EvaluateRow } from "../interfaces/EvaluateRow";
 
 const NAME_PATTERN = /\[(.+?) ?熱/;
 
-const SCORE_PATTERNS = {
+const SCORE_PATTERNS: Record<EvaluateKeys, RegExp> = {
   enthusiasm: /熱中(10|[1-9])-/,
   innovative: /斬新(10|[1-9])-/,
   story: /物語(10|[1-9])-/,
@@ -19,7 +19,7 @@ export const text2EvaluateRowArray = (text: string): EvaluateRow[] => {
   const rows: EvaluateRow[] = [];
 
   for (const line of text.split(/\r\n|\r|\n/)) {
-    if (!line) continue;
+    if (!line.trim()) continue;
 
     const row = text2EvaluateRow(line);
 
@@ -31,7 +31,7 @@ export const text2EvaluateRowArray = (text: string): EvaluateRow[] => {
   return rows;
 };
 
-export const text2EvaluateRow = (text: string): EvaluateRow => {
+export const text2EvaluateRow = (line: string): EvaluateRow => {
   const row: EvaluateRow = {
     name: "",
     score: {
@@ -44,19 +44,16 @@ export const text2EvaluateRow = (text: string): EvaluateRow => {
     },
   };
 
-  const name = NAME_PATTERN.exec(text);
+  const name = NAME_PATTERN.exec(line);
   row.name = name?.[1] ?? "-";
 
-  for (const [key, pattern] of Object.entries(SCORE_PATTERNS) as [
-    EvaluateKeys,
-    RegExp,
-  ][]) {
-    const match = pattern.exec(text);
+  for (const key of Object.keys(SCORE_PATTERNS) as EvaluateKeys[]) {
+    const match = SCORE_PATTERNS[key].exec(line);
 
     if (!match) continue;
 
-    if (typeof match[1] === "string") {
-      row.score[key] = parseInt(match[1]);
+    if (match[1] !== undefined) {
+      row.score[key] = parseInt(match[1], 10);
     }
   }
 
