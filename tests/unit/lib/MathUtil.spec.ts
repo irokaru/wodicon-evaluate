@@ -54,6 +54,14 @@ describe("medianArray", () => {
       expect(medianArray(suite[1])).toEqual(suite[0]);
     }
   });
+
+  test("入力配列を破壊しない", () => {
+    const input = [5, 3, 1, 4, 2];
+    const snapshot = [...input];
+
+    expect(medianArray(input)).toEqual(3);
+    expect(input).toEqual(snapshot);
+  });
 });
 
 describe("roundDigit", () => {

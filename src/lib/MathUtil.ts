@@ -1,7 +1,7 @@
 export const totalArray = (array: number[]): number => {
   if (!array.length) return 0;
 
-  return array.reduce((prev, current) => prev + current);
+  return array.reduce((prev, current) => prev + current, 0);
 };
 
 export const averageArray = (array: number[]): number => {
@@ -13,20 +13,15 @@ export const averageArray = (array: number[]): number => {
 export const medianArray = (array: number[]): number => {
   if (!array.length) return 0;
 
-  const sorted = array.sort((a, b) => {
-    if (a < b) return -1;
-    if (b < a) return 1;
-    return 0;
-  });
+  const sorted = [...array].sort((a, b) => a - b);
 
-  const mid = sorted.length / 2;
-  const midInt = mid >> 0;
+  if (sorted.length % 2 === 1) {
+    return sorted[Math.floor(sorted.length / 2)] ?? 0;
+  }
 
-  if (!Number.isInteger(mid))
-    return sorted[midInt] !== undefined ? sorted[midInt] : 0;
-
-  const left = sorted[midInt - 1];
-  const right = sorted[midInt];
+  const rightIndex = sorted.length / 2;
+  const left = sorted[rightIndex - 1];
+  const right = sorted[rightIndex];
   if (left === undefined || right === undefined) return 0;
   return (left + right) / 2;
 };
