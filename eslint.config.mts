@@ -3,7 +3,7 @@ import globals from 'globals'
 import typescriptEslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
 import prettierConfig from "@vue/eslint-config-prettier";
-import vitest from 'eslint-plugin-vitest'
+import vitest from '@vitest/eslint-plugin'
 
 export default typescriptEslint.config(
   {
