@@ -11,6 +11,11 @@ export default defineConfig({
     globals: true,
     environment: "happy-dom",
     reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["default"],
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "lcov", "clover"],
+      include: ["src/**/*"],
+    },
   },
   resolve: {
     alias: {
