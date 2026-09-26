@@ -29,13 +29,19 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Lint
+        run: npm run lint:check
+
       - name: Test
         run: npm run coverage
+
+      - name: Build
+        run: npm run build
 
       - name: upload coverage
         uses: codecov/codecov-action@v7
         with:
-          files: ./coverage/lcov.info,./coverage/clover.xml
+          files: ./coverage/lcov.info
           fail_ci_if_error: true
           use_oidc: true
           verbose: true
