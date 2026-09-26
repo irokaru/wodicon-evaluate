@@ -1,19 +1,22 @@
 <template>
   <tr>
-    <td>{{ evaluate.name }}</td>
+    <td>{{ props.evaluate.name }}</td>
     <td
-      v-for="score in evaluate.score"
-      :key="score"
+      v-for="key in evaluateKeys"
+      :key="key"
       class="number"
-      :class="`c${score}`"
+      :class="`c${props.evaluate.score[key]}`"
     >
-      {{ score }}
+      {{ props.evaluate.score[key] }}
     </td>
   </tr>
 </template>
 
 <script setup lang="ts">
+import { EvaluateKey } from "../constants/Evaluates";
 import type { EvaluateRow } from "../interfaces/EvaluateRow";
 
-const { evaluate } = defineProps<{ evaluate: EvaluateRow }>();
+const props = defineProps<{ evaluate: EvaluateRow }>();
+
+const evaluateKeys = Object.values(EvaluateKey);
 </script>
