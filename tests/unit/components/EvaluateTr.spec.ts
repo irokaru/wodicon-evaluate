@@ -27,23 +27,27 @@ describe("template", () => {
     };
   };
 
-  test.each([[["hoge", 1, 2, 3, 4, 5, 6], _p("hoge", 1, 2, 3, 4, 5, 6)]])(
-    "ちゃんと入ってるとき",
-    (expected, evaluates) => {
-      const wrapper = mount(EvaluateTr, {
-        props: {
-          evaluate: evaluates,
-        },
-      });
+  test.each([
+    ["hoge", 1, 2, 3, 4, 5, 6],
+    ["重複スコア", 5, 5, 5, 5, 5, 5],
+  ])("ちゃんと入ってるとき %s", (name, ...scores) => {
+    const [enthusiasm, innovative, story, media, easy, other] = scores;
+    const wrapper = mount(EvaluateTr, {
+      props: {
+        evaluate: _p(name, enthusiasm, innovative, story, media, easy, other),
+      },
+    });
 
-      const tds = wrapper.findAll("td");
+    const tds = wrapper.findAll("td");
 
-      expect(tds).toHaveLength(7);
+    expect(tds).toHaveLength(7);
+    expect(tds[0].text()).toEqual(name);
 
-      for (const index in expected.keys()) {
-        const num = Number(index);
-        expect(tds[num]).toEqual(expected[num]);
-      }
-    },
-  );
+    const expectedScores = [enthusiasm, innovative, story, media, easy, other];
+    expectedScores.forEach((expected, index) => {
+      const td = tds[index + 1];
+      expect(td.text()).toEqual(String(expected));
+      expect(td.classes()).toContain(`c${expected}`);
+    });
+  });
 });
