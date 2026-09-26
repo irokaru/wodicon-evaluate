@@ -12,7 +12,7 @@
     />
 
     <div class="right">
-      <div class="btn big soft orange" @click="exec">評価を算出</div>
+      <button class="btn big soft orange" @click="exec">評価を算出</button>
     </div>
 
     <hr />
@@ -36,40 +36,25 @@
         <thead>
           <tr>
             <th>投票者名</th>
-            <th>熱中</th>
-            <th>斬新</th>
-            <th>物語</th>
-            <th>画像音声</th>
-            <th>遊びやすさ</th>
-            <th>その他</th>
+            <th v-for="key in evaluateKeys" :key="key">
+              {{ EvaluateKeyLabels[key] }}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <EvaluateTr
             v-for="(evaluate, index) in evaluates"
-            :key="`${evaluate.name}-${index}`"
+            :key="index"
             :evaluate="evaluate"
           />
         </tbody>
 
         <tfoot>
-          <tr>
-            <th>平均値</th>
+          <tr v-for="summary in summaries" :key="summary.label">
+            <th>{{ summary.label }}</th>
             <td v-for="key in evaluateKeys" :key="key" class="number">
-              {{ average(key) }}
-            </td>
-          </tr>
-          <tr>
-            <th>中央値</th>
-            <td v-for="key in evaluateKeys" :key="key" class="number">
-              {{ median(key) }}
-            </td>
-          </tr>
-          <tr>
-            <th>合計値</th>
-            <td v-for="key in evaluateKeys" :key="key" class="number">
-              {{ total(key) }}
+              {{ summary.calc(key) }}
             </td>
           </tr>
         </tfoot>
@@ -118,6 +103,12 @@ const median = (key: EvaluateKey): number => {
   const numbers = getEvaluateNumbers(evaluates.value, key);
   return medianArray(numbers);
 };
+
+const summaries: { label: string; calc: (key: EvaluateKey) => number }[] = [
+  { label: "平均値", calc: average },
+  { label: "中央値", calc: median },
+  { label: "合計値", calc: total },
+];
 
 const shareOnX = (): void => {
   const labels = Object.values(EvaluateKeyLabels);
