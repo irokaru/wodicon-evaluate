@@ -7,9 +7,7 @@
       :cols="cols"
       :placeholder="placeholder"
       :value="modelValue"
-      @input="
-        $emit('update:modelValue', ($event.target as HTMLTextAreaElement).value)
-      "
+      @input="onInput"
     ></textarea>
   </div>
 </template>
@@ -20,10 +18,16 @@ interface Props {
   rows?: number;
   cols?: number;
   placeholder?: string;
-  resize?: string;
+  resize?: "none" | "both" | "horizontal" | "vertical";
   modelValue?: string;
 }
 
 defineProps<Props>();
-defineEmits(["update:modelValue"]);
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
+
+const onInput = (event: Event): void => {
+  emit("update:modelValue", (event.target as HTMLTextAreaElement).value);
+};
 </script>
