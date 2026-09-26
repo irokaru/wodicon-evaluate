@@ -71,6 +71,7 @@ import {
   roundDigit,
   totalArray,
 } from "./lib/MathUtil";
+import { buildShareText, buildShareUrl } from "./lib/ShareText";
 
 import VTextArea from "./components/VTextArea.vue";
 import EvaluateTr from "./components/EvaluateTr.vue";
@@ -112,20 +113,15 @@ const summaries: { label: string; calc: (key: EvaluateKey) => number }[] = [
 
 const shareOnX = (): void => {
   const labels = Object.values(EvaluateKeyLabels);
-  const averages = evaluateKeys.map(average);
-  const totals = evaluateKeys.map(total);
-  const medians = evaluateKeys.map(median);
-  const text =
-    `投票数: ${evaluates.value.length}\n` +
-    `項目: ${labels.join(" ")}\n` +
-    `平均値: ${averages.join(" ")}\n` +
-    `中央値: ${medians.join(" ")}\n` +
-    `合計値: ${totals.join(" ")}\n` +
-    "#ウディコン評価算出機\n" +
-    "https://wodicon-evaluate.nononotyaya.net/";
+  const shareText = buildShareText({
+    voteCount: evaluates.value.length,
+    labels,
+    averages: evaluateKeys.map(average),
+    medians: evaluateKeys.map(median),
+    totals: evaluateKeys.map(total),
+  });
 
-  const url = `https://x.com/intent/post?text=${encodeURIComponent(text)}`;
-  window.open(url, "_blank");
+  window.open(buildShareUrl(shareText), "_blank");
 };
 
 const getEvaluateNumbers = (
