@@ -1,16 +1,23 @@
 import type { EvaluateKeys } from "../interfaces/Evaluates";
 import { isEvaluates } from "../interfaces/Evaluates";
 import type { EvaluateRow } from "../interfaces/EvaluateRow";
+import { EvaluateKey, EvaluateKeyLabels } from "../constants/Evaluates";
 
 const NAME_PATTERN = /\[(.+?) ?熱/;
 
+const scorePattern = (
+  key: EvaluateKeys,
+  infix: string,
+  suffix: string,
+): RegExp => new RegExp(`${EvaluateKeyLabels[key]}${infix}(10|[1-9])${suffix}`);
+
 const SCORE_PATTERNS: Record<EvaluateKeys, RegExp> = {
-  enthusiasm: /熱中(10|[1-9])-/,
-  innovative: /斬新(10|[1-9])-/,
-  story: /物語(10|[1-9])-/,
-  media: /画像音声(10|[1-9])-/,
-  easy: /遊びやすさ(10|[1-9])-/,
-  other: /その他\+(10|[1-9])]/,
+  [EvaluateKey.ENTHUSIASM]: scorePattern(EvaluateKey.ENTHUSIASM, "", "-"),
+  [EvaluateKey.INNOVATIVE]: scorePattern(EvaluateKey.INNOVATIVE, "", "-"),
+  [EvaluateKey.STORY]: scorePattern(EvaluateKey.STORY, "", "-"),
+  [EvaluateKey.MEDIA]: scorePattern(EvaluateKey.MEDIA, "", "-"),
+  [EvaluateKey.EASY]: scorePattern(EvaluateKey.EASY, "", "-"),
+  [EvaluateKey.OTHER]: scorePattern(EvaluateKey.OTHER, "\\+", "]"),
 };
 
 // --------------------------------------------------------------------
