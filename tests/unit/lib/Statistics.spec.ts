@@ -3,7 +3,7 @@ import {
   medianArray,
   roundDigit,
   totalArray,
-} from "@/lib/MathUtil";
+} from "@/lib/Statistics";
 
 describe("totalArray", () => {
   test("total", () => {

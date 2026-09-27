@@ -59,9 +59,7 @@ export const text2EvaluateRow = (line: string): EvaluateRow => {
 
     if (!match) continue;
 
-    if (match[1] !== undefined) {
-      row.score[key] = parseInt(match[1], 10);
-    }
+    row.score[key] = parseInt(match[1], 10);
   }
 
   return row;

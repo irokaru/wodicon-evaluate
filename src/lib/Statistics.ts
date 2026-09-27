@@ -16,13 +16,12 @@ export const medianArray = (array: number[]): number => {
   const sorted = [...array].sort((a, b) => a - b);
 
   if (sorted.length % 2 === 1) {
-    return sorted[Math.floor(sorted.length / 2)] ?? 0;
+    return sorted[Math.floor(sorted.length / 2)] as number;
   }
 
   const rightIndex = sorted.length / 2;
-  const left = sorted[rightIndex - 1];
-  const right = sorted[rightIndex];
-  if (left === undefined || right === undefined) return 0;
+  const left = sorted[rightIndex - 1] as number;
+  const right = sorted[rightIndex] as number;
   return (left + right) / 2;
 };
 

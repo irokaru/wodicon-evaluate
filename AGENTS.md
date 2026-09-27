@@ -18,10 +18,10 @@ WOLF RPGエディターコンテスト (ウディコン) の投稿者向けツ�
 
 実装の詳細はコードを読め。入口だけ示す。
 
-- UIフロー: `src/App.vue` (`exec` → 集計 → `shareOnX`)
+- UIフロー: `src/App.vue` (View) + `src/composables/useEvaluate.ts` (ViewModel: `exec` → 集計 → `shareOnX`)
 - メール本文のパース: `src/lib/EvaluateText.ts`
 - 有効票の判定: `src/interfaces/Evaluates.ts`
-- 集計計算: `src/lib/MathUtil.ts`
+- 集計計算: `src/lib/Statistics.ts`
 - X共有文の組み立て: `src/lib/ShareText.ts`
 - テストは `tests/unit/` が `src/` と対応。実メールでの回帰は `tests/text/evaluate_ok.txt` を使う。
 
