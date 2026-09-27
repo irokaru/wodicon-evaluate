@@ -64,70 +64,13 @@
 </template>
 
 <script setup lang="ts">
-import { text2EvaluateRowArray } from "./lib/EvaluateText";
-import {
-  averageArray,
-  medianArray,
-  roundDigit,
-  totalArray,
-} from "./lib/MathUtil";
-import { buildShareText, buildShareUrl } from "./lib/ShareText";
+import { useEvaluate } from "./composables/useEvaluate";
 
 import VTextArea from "./components/VTextArea.vue";
 import EvaluateTr from "./components/EvaluateTr.vue";
 
-import type { EvaluateRow } from "./interfaces/EvaluateRow";
-import { EvaluateKey, EvaluateKeyLabels } from "./constants/Evaluates";
-import { ref } from "vue";
+import { EvaluateKeyLabels } from "./constants/Evaluates";
 
-const text = ref("");
-const evaluates = ref<EvaluateRow[]>([]);
-const evaluateKeys = Object.values(EvaluateKey);
-const isExecuted = ref(false);
-
-const exec = (): void => {
-  evaluates.value = text2EvaluateRowArray(text.value);
-  isExecuted.value = evaluates.value.length > 0;
-};
-
-const total = (key: EvaluateKey): number => {
-  const numbers = getEvaluateNumbers(evaluates.value, key);
-  return totalArray(numbers);
-};
-
-const average = (key: EvaluateKey): number => {
-  const numbers = getEvaluateNumbers(evaluates.value, key);
-  return roundDigit(averageArray(numbers), 2);
-};
-
-const median = (key: EvaluateKey): number => {
-  const numbers = getEvaluateNumbers(evaluates.value, key);
-  return medianArray(numbers);
-};
-
-const summaries: { label: string; calc: (key: EvaluateKey) => number }[] = [
-  { label: "平均値", calc: average },
-  { label: "中央値", calc: median },
-  { label: "合計値", calc: total },
-];
-
-const shareOnX = (): void => {
-  const labels = Object.values(EvaluateKeyLabels);
-  const shareText = buildShareText({
-    voteCount: evaluates.value.length,
-    labels,
-    averages: evaluateKeys.map(average),
-    medians: evaluateKeys.map(median),
-    totals: evaluateKeys.map(total),
-  });
-
-  window.open(buildShareUrl(shareText), "_blank");
-};
-
-const getEvaluateNumbers = (
-  evaluates: EvaluateRow[],
-  key: EvaluateKey,
-): number[] => {
-  return evaluates.map((evaluate) => evaluate.score[key]);
-};
+const { text, evaluates, evaluateKeys, isExecuted, summaries, exec, shareOnX } =
+  useEvaluate();
 </script>
